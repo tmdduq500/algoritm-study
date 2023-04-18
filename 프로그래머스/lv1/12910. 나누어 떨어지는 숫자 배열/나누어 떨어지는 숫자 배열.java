@@ -23,6 +23,8 @@ class Solution {
                 break;
             }
         }
+        
+        //오름차순 정렬하기
         int temp=0;
         for(int p=0; p<answer.length; p++){
             for(int q=p+1; q<answer.length; q++){
@@ -33,6 +35,9 @@ class Solution {
                 }
             }
         }
+        
+        //오름차순 정렬(함수사용)
+        // Arrays.sort(answer);
         
         return answer;
         
