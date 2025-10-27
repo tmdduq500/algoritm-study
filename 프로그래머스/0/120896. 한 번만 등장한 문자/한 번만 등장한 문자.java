@@ -1,26 +1,23 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
+
 class Solution {
     public String solution(String s) {
         String answer = "";
         
-        List<String> sb = new ArrayList<>();
-        List<String> distinctStr = Arrays.stream(s.split("")).distinct().collect(Collectors.toList());
-        for (String string : distinctStr) {
-            int count = 0;
-            for (int i = 0; i < s.length(); i++) {
-                if (string.equals(String.valueOf(s.charAt(i)))) {
-                    count++;
-                }
-            }
-            if (count == 1) {
-                sb.add(string);
-            }
+        Map<Character, Integer> map = new HashMap<>();
+        
+        for (char c : s.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
-        sb.sort(String::compareTo);
-        answer = String.join("", sb);
+        
+        answer = map.entrySet().stream()
+                .filter(e -> e.getValue() == 1)
+                .map(e -> String.valueOf(e.getKey()))
+                .sorted()
+                .collect(Collectors.joining());
+        
         return answer;
     }
 }
